@@ -1,19 +1,15 @@
-import Signin from "@/components/Auth/Signin";
+
+import Signup from "@/components/Auth/signup";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { getSessionData } from "@/lib/session";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Sign in",
 };
 
-export default async function  SignIn() {
-  const session = await getSessionData();
-  console.log(session);
-
+export default function SignUp() {
   return (
     <>
       <Breadcrumb pageName="Sign In" />
@@ -22,7 +18,7 @@ export default async function  SignIn() {
         <div className="flex flex-wrap items-center">
           <div className="w-full xl:w-1/2">
             <div className="w-full p-4 sm:p-12.5 xl:p-15">
-              <Signin />
+              <Signup />
             </div>
           </div>
 

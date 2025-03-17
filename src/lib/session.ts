@@ -8,14 +8,15 @@ const encodedKey = new TextEncoder().encode(secretKey)
 type SessionData = {
     userId: string
     email: string
-    role: string
+    first_name: string
+    last_name: string
     expiresAt: number
 }
 
-export async function createSession(userId: string, email: string, role?: string) {
+export async function createSession(userId: string, email: string,first_name: string,last_name: string) {
     const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000;
 
-    const session = await new SignJWT({ userId, email, role, expiresAt })
+    const session = await new SignJWT({ userId, email, first_name,last_name, expiresAt })
         .setProtectedHeader({ alg: "HS256" })
         .setIssuedAt()
         .setExpirationTime("30d")

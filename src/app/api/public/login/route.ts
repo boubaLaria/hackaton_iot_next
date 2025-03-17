@@ -72,51 +72,61 @@
  */
 
 import { NextResponse } from 'next/server';
-import bcrypt from "bcrypt";
-import {createSession} from "../../../lib/session";
-import prisma from "../../../lib/prisma";
+import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+import { createSession } from '@/lib/session';
 
-
+const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
     try {
         const { email, password } = await request.json();
 
+        // Validate input fields
+        if (!email?.trim() || !password?.trim()) {
+            return NextResponse.json(
+                { error: 'Email et mot de passe sont obligatoires' },
+                { status: 400 }
+            );
+        }
+
         const user = await prisma.user.findUnique({
-            where: { email },
+            where: { email: email.toLowerCase().trim() },
         });
 
         if (!user) {
             return NextResponse.json(
-                { error: 'Email non trouvé' },
+                { error: 'Utilisateur non trouvé' },
                 { status: 404 }
             );
         }
-        if (user.email.replace(/\s+/g, "") == "") {
-            return NextResponse.json(
-                { error: 'vous devez saisir l\'email' },
-                { status: 31 }
-            );
-        }
-        const passwordValid = await bcrypt.compare(password, user.password);
-        if (!passwordValid) {
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordValid) {
             return NextResponse.json(
                 { error: 'Mot de passe incorrect' },
                 { status: 401 }
             );
         }
-        await createSession(user.id, user.email, user.role)
+        await createSession(user.id, user.email,user.first_name,user.last_name);
 
         return NextResponse.json({
-            message: 'Connexion réussie',
-            user: { id: user.id, email: user.email }
+            success: true,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+            },
         });
-
     } catch (error) {
-        console.error('Login error:', error);
+        console.error('Login error:', error instanceof Error ? error.message : error);
         return NextResponse.json(
-            { error: 'Une erreur est survenue' },
+            { error: 'Une erreur est survenue lors de la connexion' },
             { status: 500 }
         );
+    } finally {
+        await prisma.$disconnect();
     }
 }

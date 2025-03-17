@@ -4,6 +4,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import InputGroup from "../FormElements/InputGroup";
 import { Checkbox } from "../FormElements/checkbox";
+import { useRouter } from "next/navigation";
+
 
 export default function SigninWithPassword() {
   const [data, setData] = useState({
@@ -11,25 +13,38 @@ export default function SigninWithPassword() {
     password: process.env.NEXT_PUBLIC_DEMO_USER_PASS || "",
     remember: false,
   });
-
+  
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // You can remove this code block
+    const response = await fetch("/api/public/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     setLoading(true);
-
-    setTimeout(() => {
+    const responseData = await response.json();
+    if (responseData.message === "Connexion réussie") {
+      console.log("Success:", response.json);
       setLoading(false);
-    }, 1000);
+      router.push("/");
+      router.refresh();
+    }else{
+      console.log("Error:", response.json);
+      setLoading(false);
+    }
   };
 
   return (

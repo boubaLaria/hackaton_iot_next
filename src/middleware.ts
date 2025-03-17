@@ -23,16 +23,20 @@ function isProtectedPath(path: string) {
 export async function middleware(request: NextRequest) {
     if (isProtectedPath(request.nextUrl.pathname) && !request.nextUrl.pathname.startsWith("/api/public")) {
         const session = await getSession()
-
+        if(session){
+            if(request.nextUrl.pathname === "/auth/sign-in" || request.nextUrl.pathname === "/auth/sign-up"){
+                return NextResponse.redirect(new URL("/", request.url))
+            }
+        }
         if (!session) {
             if (request.nextUrl.pathname === "/") {
-                return NextResponse.redirect(new URL("/login", request.url))
+                return NextResponse.redirect(new URL("/auth/sign-in", request.url))
             }
             else if (request.nextUrl.pathname.startsWith("/api/")) {
                 return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
             }
             else {
-                return NextResponse.redirect(new URL("/error401", request.url))
+                return NextResponse.redirect(new URL("/auth/sign-in", request.url))
             }
         }
     }
