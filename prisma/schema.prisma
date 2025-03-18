@@ -23,4 +23,16 @@ model User {
   phone               String        @unique
   created_at          DateTime      @default(now())
   updated_at          DateTime?     
+  equipements         Equipement[]
+}
+
+model Equipement {
+  id                String  @id @default(cuid())
+  type              String 
+  name              String
+  state             Boolean @default(false)
+  created_at        DateTime  @default(now())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  updated_at        DateTime?
 }
