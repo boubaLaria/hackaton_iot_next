@@ -71,7 +71,7 @@ export default function SigninWithPassword() {
         icon={<PasswordIcon />}
       />
 
-      <div className="mb-6 flex items-center justify-between gap-2 py-2 font-medium">
+      {/* <div className="mb-6 flex items-center justify-between gap-2 py-2 font-medium">
         <Checkbox
           label="Remember me"
           name="remember"
@@ -92,7 +92,7 @@ export default function SigninWithPassword() {
         >
           Forgot Password?
         </Link>
-      </div>
+      </div> */}
 
       <div className="mb-4.5">
         <button
