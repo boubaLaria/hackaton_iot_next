@@ -5,17 +5,20 @@ type SVGPropsType = SVGProps<SVGSVGElement>;
 export function Views(props: SVGPropsType) {
   return (
     <svg width={58} height={58} viewBox="0 0 58 58" fill="none" {...props}>
+      {/* Cercle de fond */}
       <circle cx={29} cy={29} r={29} fill="#3FD97F" />
-      <path
-        d="M26.562 29a2.437 2.437 0 114.875 0 2.437 2.437 0 01-4.875 0z"
-        fill="#fff"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M18.166 29c0 1.776.46 2.374 1.382 3.57 1.838 2.389 4.922 5.097 9.452 5.097s7.614-2.708 9.452-5.096c.92-1.197 1.381-1.795 1.381-3.57 0-1.777-.46-2.375-1.381-3.571-1.838-2.389-4.922-5.096-9.452-5.096s-7.614 2.707-9.452 5.096c-.921 1.196-1.381 1.794-1.381 3.57zM29 24.938a4.063 4.063 0 100 8.125 4.063 4.063 0 000-8.125z"
-        fill="#fff"
-      />
+
+      {/* Écran du laptop */}
+      <rect x="16" y="18" width="26" height="16" rx="2" fill="white" stroke="white" strokeWidth="2" />
+
+      {/* Clavier/base du laptop */}
+      <rect x="14" y="36" width="30" height="4" rx="1" fill="white" />
+
+      {/* Charnière */}
+      <line x1="14" y1="36" x2="44" y2="36" stroke="white" strokeWidth="2" />
+
+      {/* Petite caméra au-dessus de l’écran */}
+      <circle cx="29" cy="20" r="1" fill="#3FD97F" />
     </svg>
   );
 }
@@ -24,14 +27,19 @@ export function Profit(props: SVGPropsType) {
   return (
     <svg width={58} height={58} viewBox="0 0 58 58" fill="none" {...props}>
       <circle cx={29} cy={29} r={29} fill="#FF9C55" />
+      {/* Ampoule */}
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M29 39.833c5.983 0 10.833-4.85 10.833-10.833 0-5.983-4.85-10.834-10.833-10.834-5.983 0-10.834 4.85-10.834 10.834 0 5.983 4.85 10.833 10.834 10.833zm.812-17.333a.812.812 0 10-1.625 0v.343c-1.766.316-3.25 1.643-3.25 3.448 0 2.077 1.964 3.521 4.063 3.521 1.491 0 2.437.982 2.437 1.896 0 .915-.946 1.896-2.437 1.896-1.491 0-2.438-.981-2.438-1.896a.812.812 0 10-1.625 0c0 1.805 1.484 3.132 3.25 3.449v.343a.812.812 0 101.625 0v-.343c1.767-.317 3.25-1.644 3.25-3.449 0-2.077-1.963-3.52-4.062-3.52-1.491 0-2.438-.982-2.438-1.896 0-.915.947-1.896 2.438-1.896s2.437.98 2.437 1.895a.813.813 0 001.625 0c0-1.805-1.483-3.132-3.25-3.448V22.5z"
+        d="M29 18c-4.418 0-8 3.582-8 8 0 2.761 1.215 5.19 3.135 6.81a3.89 3.89 0 011.365 2.928V37a1 1 0 001 1h6a1 1 0 001-1v-1.262c0-1.13.498-2.207 1.365-2.928C35.785 31.19 37 28.761 37 26c0-4.418-3.582-8-8-8zm-2 22h4v2h-4v-2z"
         fill="#fff"
       />
-    </svg>
-  );
+      {/* Rayons lumineux */}
+      <line x1="29" y1="10" x2="29" y2="14" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <line x1="29" y1="44" x2="29" y2="48" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <line x1="18" y1="15" x2="21" y2="18" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <line x1="40" y1="15" x2="37" y2="18" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <line x1="14" y1="29" x2="18" y2="29" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <line x1="44" y1="29" x2="40" y2="29" stroke="white" strokeWidth="2" strokeLinecap="round" />
+    </svg>);
 }
 
 export function Product(props: SVGPropsType) {
@@ -39,9 +47,10 @@ export function Product(props: SVGPropsType) {
     <svg width={58} height={58} viewBox="0 0 58 58" fill="none" {...props}>
       <circle cx={29} cy={29} r={29} fill="#8155FF" />
       <path
-        d="M35.043 20.8l-2.167-1.136c-1.902-.998-2.853-1.498-3.876-1.498-1.023 0-1.974.5-3.876 1.498L22.958 20.8c-1.922 1.008-3.051 1.6-3.752 2.394L29 28.09l9.794-4.896c-.7-.793-1.83-1.386-3.751-2.394zM39.56 24.628l-9.747 4.874v10.227c.777-.194 1.662-.658 3.063-1.393l2.167-1.137c2.33-1.223 3.496-1.835 4.143-2.934.647-1.099.647-2.467.647-5.202v-.127c0-2.05 0-3.332-.272-4.308zM28.188 39.73V29.501l-9.749-4.874c-.272.976-.272 2.258-.272 4.308v.127c0 2.735 0 4.103.647 5.202.647 1.1 1.813 1.71 4.144 2.934l2.166 1.137c1.4.735 2.286 1.2 3.064 1.393z"
+        d="M29 18c-4.418 0-8 3.582-8 8 0 2.761 1.215 5.19 3.135 6.81a3.89 3.89 0 011.365 2.928V37a1 1 0 001 1h6a1 1 0 001-1v-1.262c0-1.13.498-2.207 1.365-2.928C35.785 31.19 37 28.761 37 26c0-4.418-3.582-8-8-8zm-2 22h4v2h-4v-2z"
         fill="#fff"
       />
+      <line x1="29" y1="44" x2="29" y2="48" stroke="white" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
