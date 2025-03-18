@@ -58,17 +58,26 @@ export async function POST(request: Request) {
     try {
         const prisma = new PrismaClient();
         const body = await request.json();
-        const { name, description, type } = body;
+        const { name, type } = body;
 
-        if (!name || !description || !type) {
+        if (!name  || !type) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
-
+        
+        const firstUser = await prisma.user.findFirst();
+        if (!firstUser) {
+            return NextResponse.json({ error: "No users found in the database" }, { status: 400 });
+        }
+        
         const newEquipement = await prisma.equipement.create({
             data: {
-                name,
-                description,
-                type,
+                name: name,
+                type: type,
+                user: {
+                    connect: {
+                        id: firstUser.id, 
+                    },
+                },
             },
         });
         prisma.$disconnect();
