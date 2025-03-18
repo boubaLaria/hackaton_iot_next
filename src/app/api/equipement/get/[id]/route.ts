@@ -40,7 +40,7 @@ import { PrismaClient } from "@prisma/client";
  *         description: Internal server error.
  */
 export async function GET(req: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     const prisma = new PrismaClient();
     try {
         const equipement = await prisma.equipement.findUnique({

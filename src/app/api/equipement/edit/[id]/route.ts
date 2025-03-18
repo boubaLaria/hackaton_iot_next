@@ -37,7 +37,7 @@ import { PrismaClient } from "@prisma/client";
  */
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     const body = await req.json();
     const prisma = new PrismaClient();
 

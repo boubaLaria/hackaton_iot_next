@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -7,16 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { compactFormat, standardFormat } from "@/lib/format-number";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { getTopChannels } from "../fetch";
-import { use, useEffect } from "react";
-import { PrismaClient } from "@prisma/client/extension";
+import Link from "next/link";
 
 export async function TopChannels({ className }: { className?: string }) {
   const data = await getTopChannels();
-  
+
   return (
     <div
       className={cn(
@@ -31,10 +27,13 @@ export async function TopChannels({ className }: { className?: string }) {
       <Table>
         <TableHeader>
           <TableRow className="border-none uppercase [&>th]:text-center">
-            <TableHead className="min-w-[120px] !text-left">Nom de l'équipement</TableHead>
+            <TableHead className="min-w-[120px] !text-left">
+              Nom de l'équipement
+            </TableHead>
             <TableHead>Type</TableHead>
             <TableHead className="!text-right">État</TableHead>
             <TableHead>Créateur</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -50,14 +49,25 @@ export async function TopChannels({ className }: { className?: string }) {
 
               <TableCell>{channel.type}</TableCell>
 
-              {channel.state ? (<TableCell className="!text-right text-green-light-1">
-                ON
-              </TableCell>) : (<TableCell className="!text-right text-red">
-                OFF
-              </TableCell>)
-              }
+              {channel.state ? (
+                <TableCell className="!text-right text-green-light-1">
+                  ON
+                </TableCell>
+              ) : (
+                <TableCell className="!text-right text-red">OFF</TableCell>
+              )}
 
-              <TableCell>{channel.user.first_name + " "+ channel.user.last_name}</TableCell>
+              <TableCell>
+                {channel.user.first_name + " " + channel.user.last_name}
+              </TableCell>
+              <TableCell>
+                <Link
+                  href={`/devise/${channel.id}/edit`}
+                  className="rounded bg-green-500 px-2 py-1 text-white hover:bg-green-600"
+                >
+                  Modifier
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
