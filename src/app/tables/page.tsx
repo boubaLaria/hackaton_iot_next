@@ -26,7 +26,7 @@ const TablesPage = () => {
           <TopProducts />
         </Suspense>
 
-        <InvoiceTable />
+        {/* <InvoiceTable /> */}
       </div>
     </>
   );
