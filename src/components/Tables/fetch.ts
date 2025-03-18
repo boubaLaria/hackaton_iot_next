@@ -1,4 +1,5 @@
 import * as logos from "@/assets/logos";
+import { PrismaClient } from "@prisma/client";
 
 export async function getTopProducts() {
   // Fake delay
@@ -74,8 +75,15 @@ export async function getInvoiceTableData() {
 
 export async function getTopChannels() {
   // Fake delay
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-
+  const prisma = new PrismaClient();
+  const equipements = await prisma.equipement.findMany({
+    include: {
+      user: true, // Inclure les données de l'utilisateur associé
+    },
+  });
+  prisma.$disconnect();
+  console.log(equipements);
+  return equipements;
   return [
     {
       name: "Lampe salon",

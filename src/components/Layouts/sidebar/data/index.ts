@@ -12,7 +12,7 @@ export const NAV_DATA = [
       },
       {
         title: "Equipements",
-        url: "/tables",
+        url: "/devise",
         icon: Icons.Table,
         items: [],
       }

@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableBody,
@@ -10,10 +11,12 @@ import { compactFormat, standardFormat } from "@/lib/format-number";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { getTopChannels } from "../fetch";
+import { use, useEffect } from "react";
+import { PrismaClient } from "@prisma/client/extension";
 
 export async function TopChannels({ className }: { className?: string }) {
   const data = await getTopChannels();
-
+  
   return (
     <div
       className={cn(
@@ -47,14 +50,14 @@ export async function TopChannels({ className }: { className?: string }) {
 
               <TableCell>{channel.type}</TableCell>
 
-              {channel.état ? (<TableCell className="!text-right text-green-light-1">
+              {channel.state ? (<TableCell className="!text-right text-green-light-1">
                 ON
               </TableCell>) : (<TableCell className="!text-right text-red">
                 OFF
               </TableCell>)
               }
 
-              <TableCell>{channel.créateur}</TableCell>
+              <TableCell>{channel.user.first_name + " "+ channel.user.last_name}</TableCell>
             </TableRow>
           ))}
         </TableBody>

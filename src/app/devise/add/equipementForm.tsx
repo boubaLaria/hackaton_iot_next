@@ -40,9 +40,9 @@ export default function EquipementForm() {
       if (response.ok) {
         console.log("Success:", data);
         setLoading(false);
-        router.push("/auth/sign-in");
+        router.push("/devise");
       }
-      router.push("/auth/sign-in");
+      router.push("/devise");
     } catch (error) {
       console.log("Error:", error);
     }
