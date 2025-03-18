@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     try {
         const prisma = new PrismaClient();
         const body = await request.json();
-        const { name, type } = body;
+        const { name, type,id_equipement } = body;
 
         if (!name  || !type) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -73,6 +73,7 @@ export async function POST(request: Request) {
             data: {
                 name: name,
                 type: type,
+                id_equipement: id_equipement,
                 user: {
                     connect: {
                         id: firstUser.id, 

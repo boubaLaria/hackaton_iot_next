@@ -27,9 +27,10 @@ model User {
 }
 
 model Equipement {
-  id                String  @id @default(cuid())
+  id                String  @id @default(cuid()) @unique
   type              String 
   name              String
+  id_equipement     String? @default("ESP32_Client")
   state             Boolean @default(false)
   created_at        DateTime  @default(now())
   userId            String

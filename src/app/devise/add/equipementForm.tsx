@@ -11,6 +11,7 @@ export default function EquipementForm() {
   const [data, setData] = useState({
     name: "",
     type: "",
+    id_equipement: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -68,6 +69,15 @@ export default function EquipementForm() {
               name="type"
               type="text"
               placeholder="Entrez le type de l'équipement"
+              className="w-full xl:w-1/2"
+              handleChange={handleChange}
+              value={data.type}
+            />
+            <InputGroup
+              label="id_equipement"
+              name="id_equipement"
+              type="id_equipement"
+              placeholder="L'identifiant de l'equipent"
               className="w-full xl:w-1/2"
               handleChange={handleChange}
               value={data.type}
