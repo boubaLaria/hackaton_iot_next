@@ -43,11 +43,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     try {
         // Remove non-editable fields
-        delete body.state;
-        delete body.created_at;
-        delete body.updated_at;
+        // delete body.state;
 
-        const updatedEquipment = await prisma.equipment.update({
+        const updatedEquipment = await prisma.equipement.update({
             where: { id },
             data: {
                 ...body,
