@@ -22,17 +22,16 @@ export async function TopChannels({ className }: { className?: string }) {
       )}
     >
       <h2 className="mb-4 text-body-2xlg font-bold text-dark dark:text-white">
-        Top Channels
+        Équipements
       </h2>
 
       <Table>
         <TableHeader>
           <TableRow className="border-none uppercase [&>th]:text-center">
-            <TableHead className="min-w-[120px] !text-left">Source</TableHead>
-            <TableHead>Visitors</TableHead>
-            <TableHead className="!text-right">Revenues</TableHead>
-            <TableHead>Sales</TableHead>
-            <TableHead>Conversion</TableHead>
+            <TableHead className="min-w-[120px] !text-left">Nom de l'équipement</TableHead>
+            <TableHead>Type</TableHead>
+            <TableHead className="!text-right">État</TableHead>
+            <TableHead>Créateur</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -43,26 +42,19 @@ export async function TopChannels({ className }: { className?: string }) {
               key={channel.name + i}
             >
               <TableCell className="flex min-w-fit items-center gap-3">
-                <Image
-                  src={channel.logo}
-                  className="size-8 rounded-full object-cover"
-                  width={40}
-                  height={40}
-                  alt={channel.name + " Logo"}
-                  role="presentation"
-                />
                 <div className="">{channel.name}</div>
               </TableCell>
 
-              <TableCell>{compactFormat(channel.visitors)}</TableCell>
+              <TableCell>{channel.type}</TableCell>
 
-              <TableCell className="!text-right text-green-light-1">
-                ${standardFormat(channel.revenues)}
-              </TableCell>
+              {channel.état ? (<TableCell className="!text-right text-green-light-1">
+                ON
+              </TableCell>) : (<TableCell className="!text-right text-red">
+                OFF
+              </TableCell>)
+              }
 
-              <TableCell>{channel.sales}</TableCell>
-
-              <TableCell>{channel.conversion}%</TableCell>
+              <TableCell>{channel.créateur}</TableCell>
             </TableRow>
           ))}
         </TableBody>
